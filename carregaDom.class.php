@@ -44,20 +44,21 @@ class imprimeDom{
 			}
 
 
-			public function inputCommomClass($caminho)
+			public function inputCommomClass($caminho, $tag)
 	{
 
 		$dom = new DOMDocument();
 		$dom->loadHTMLFile($caminho);
 
-		$controle = 0;
+		$controle = 0; // Variável de controle
 		// Consultando os links
-		$links = $dom->getElementsByTagName('input');
+		$links = $dom->getElementsByTagName($tag);
 		foreach ($links as $link) {
 		
-		if ($controle == 0) {
-				$this->novaClass = '<input class='."'".$novaClass.$link->getAttribute('class')."'";
+		if ($controle == 0) { // Pega primeiro valor da class e assume como padrão
+				$this->novaClass = '<input class='."'".$link->getAttribute('class')."' >"; // Retorna tag do HTML com a nova class
 				$this->retorno = " class='".$link->getAttribute('class').PHP_EOL."' ";
+				// Oferece ópção para troca de classe
 			}	
 		  
 		  $controle++;
@@ -79,7 +80,8 @@ class imprimeDom{
 <?php 
 
 $dip = new imprimeDom;
-$dip->DIPCSS('temas/materialize/modelo.html');
+$dip->DIPCSS('temas/materialize/modelo.html'); // Carrega CSSs
+$dip->DIPJS('temas/materialize/modelo.html'); // Carrega CSSs
 
 ?>
 	<title></title>
@@ -88,15 +90,22 @@ $dip->DIPCSS('temas/materialize/modelo.html');
 
 <?php 
 
-$app = new imprimeDom;
-$app->inputCommomClass('temas/bootstrap/form.html');
-$novaClass = $app->retorno;
+$euQueroATag = 'button';
+$localizadaEm = 'html/form-blank.html';
 
-$file = file_get_contents('html/form-blank.html');
+	$app = new imprimeDom;
+	$app->inputCommomClass('temas/bootstrap/form.html', $euQueroATag); // Usa uma página HTML como modelo e injeta dependências CSS na página
+	$novaClassInput = $app->retorno;
 
-$novoFile = str_replace('<input ', "<input $novaClass ", $file);
+$seTransformeEm = $novaClassInput;
+$baseadoNoTemplate = 'temas/bootstrap/form.html'; // Formulário de exemplo (não é bootstrap)
 
-echo $file;
+
+$originalHTML = file_get_contents('html/form-blank.html');
+
+$novoHTML = str_replace("$euQueroATag", "$euQueroATag $novaClassInput ", $originalHTML);
+
+echo $novoHTML;
 
 ?>
 
