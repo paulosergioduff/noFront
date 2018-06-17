@@ -29,7 +29,7 @@ class imprimeDOM
 												echo "<link rel='stylesheet' href='" . $link->getAttribute('href') . "'>" . PHP_EOL;
 								}
 				}
-				public function inputCommomClass($caminho, $tag)
+				public function CommomClass($caminho, $tag)
 				{
 								$dom = new DOMDocument();
 								$dom->loadHTMLFile($caminho);
@@ -37,15 +37,15 @@ class imprimeDOM
 								// Consultando os links
 								$links    = $dom->getElementsByTagName($tag);
 								foreach ($links as $link) {
-												if ($controle == 0) { // Pega primeiro valor da class e assume como padrão
-																$this->novaClass = '<input class=' . "'" . $link->getAttribute('class') . "' >"; // Retorna tag do HTML com a nova class
+												if ($controle == 0) { // Pega primeiro valor da class e assume como padrão (uma por tag)
+																$this->novaClass = '<'.$tag.' class=' . "'" . $link->getAttribute('class') . "' >"; // Retorna tag do HTML com a nova class
 																$this->retorno   = " class='" . $link->getAttribute('class') . PHP_EOL . "' ";
 																// Oferece ópção para troca de classe
 												}
 												$controle++;
 								}
 							}
-				public function CommomTag($caminho, $tag, $atributo)
+				public function CommomTag($caminho, $tag, $atributo) // Em desenvolvimento - antiga função
 				{
 								$dom = new DOMDocument();
 								$dom->loadHTMLFile($caminho);
@@ -61,11 +61,20 @@ class imprimeDOM
 												$controle++;
 								}
 				}
-				public function entregaResultado(){
+				public function entregaResultado($tags){
+					$x = 0;
+					$count = count($tags);
+						while ($x < $count) {
+							echo "<p>".$tags[$x];
+							$x++;
+						}
+
 					$this->alvo = file_get_contents($this->alvo); // Pega todo conteúdo da página html alvo
 					$this->entrega = str_replace("$this->tag", "$this->tag $this->novoAtributo ", $this->alvo); // str_replace substitui atributo antigo
 					echo $this->entrega; // Imprime na tela o resultado da troca
-				}
+					echo "<h1>".count($tags)."</h1>";
+					echo $tags[0];
+									}
 }
 ?>
 
