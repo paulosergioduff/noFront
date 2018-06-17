@@ -12,14 +12,14 @@ $dip->DIPJS('temas/bootstrap/modelo.html'); // Carrega CSSs
 <body>
 
 <?php
-$app          = new imprimeDOM; // Instancia classe de captura de DOM
-$app->tag = $euQueroATag  = 'button';
-$app->alvo = $localizadaEm = 'html/form-alvo.html';
-$modelo = $app->modelo = 'temas/bootstrap/form-modelo-bootstrap.html'; // Página modelo para aplicar o template
-$app->inputCommomClass($modelo, $euQueroATag); // Usa uma página HTML como modelo e injeta dependências CSS na página
-$app->novoAtributo    = $app->retorno; // Determina novo atributo para a tag
+$define          = new imprimeDOM; // Instancia classe de captura de DOM
+$define->tag = 'button'; // Define a tag a ser utilizada no novo template
+$define->alvo = 'html/form-alvo.html'; //Escolhe uma página para aplicar a mudança
+$modelo = $define->modelo = 'temas/bootstrap/form-modelo-bootstrap.html'; // Página modelo para aplicar o template
+$define->inputCommomClass($modelo, $define->tag); // Usa uma página HTML como modelo e injeta dependências CSS na página
+$define->novoAtributo    = $define->retorno; // Determina novo atributo para a tag
 
-$app->entrega();
+$define->entrega();
 
 
 ?>
