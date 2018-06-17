@@ -61,7 +61,7 @@ class imprimeDOM
 												$controle++;
 								}
 				}
-				public function entrega(){
+				public function entregaResultado(){
 					$this->alvo = file_get_contents($this->alvo); // Pega todo conteúdo da página html alvo
 					$this->entrega = str_replace("$this->tag", "$this->tag $this->novoAtributo ", $this->alvo); // str_replace substitui atributo antigo
 					echo $this->entrega; // Imprime na tela o resultado da troca

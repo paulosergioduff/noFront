@@ -19,7 +19,7 @@ $modelo = $define->modelo = 'temas/bootstrap/form-modelo-bootstrap.html'; // Pá
 $define->inputCommomClass($modelo, $define->tag); // Usa uma página HTML como modelo e injeta dependências CSS na página
 $define->novoAtributo    = $define->retorno; // Determina novo atributo para a tag
 
-$define->entrega();
+$define->entregaResultado();
 
 
 ?>
