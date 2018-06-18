@@ -6,7 +6,7 @@ $test = new testRecebeAtributo() ;
 
 $arrays = ["pão", "queijo", "cenoura"];
 
-$test->setControle($arrays);
+$test->setAtributos($arrays);
 
 $test->testRecebeAtributo();
 
