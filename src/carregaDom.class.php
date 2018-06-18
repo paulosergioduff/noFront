@@ -2,13 +2,7 @@
 libxml_use_internal_errors(true); // Desativa mensagens de duplicada de DOM
 class imprimeDOM
 {
-				public $caminho;
-				public $tag;
-				public $parametro;
-				public $alvo;
-				public $modelo;
-				public $novoAtributo;
-				public $entrega;
+				
 				public function DIPJS($caminho)
 				{
 								$dom = new DOMDocument();
